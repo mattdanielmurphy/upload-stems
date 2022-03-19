@@ -1,5 +1,6 @@
 import AWS from 'aws-sdk'
 import JSONdb from 'simple-json-db'
+import fs from 'fs'
 import path from 'path'
 
 const s3 = new AWS.S3({
