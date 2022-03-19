@@ -26,7 +26,7 @@ async function uploadToS3(s3, pathToFile, s3Dir) {
 		s3.upload(params, (err, data) => {
 			if (err) reject(err)
 			console.log('file uploaded', data?.Key)
-			uploadedStemsDb.set(fileName)
+			uploadedStemsDb.set(fileName, true)
 			resolve('')
 		})
 	})
@@ -44,7 +44,7 @@ const stems = fs
 
 stems.forEach((stem) => {
 	const pathToStem = path.join(dir, stem)
-	if (!uploadedStems.includes(stem)) {
+	if (!Object.keys(uploadedStems).includes(stem)) {
 		uploadToS3(s3, pathToStem, 'stems')
 	}
 })
