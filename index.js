@@ -45,6 +45,6 @@ const stems = fs
 stems.forEach((stem) => {
 	const pathToStem = path.join(dir, stem)
 	if (!Object.keys(uploadedStems).includes(stem)) {
-		uploadToS3(s3, pathToStem, 'stems')
+		await uploadToS3(s3, pathToStem, 'stems')
 	}
 })
