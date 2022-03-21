@@ -42,9 +42,12 @@ const stems = fs
 			!file.includes('Sample'),
 	)
 
-stems.forEach((stem) => {
-	const pathToStem = path.join(dir, stem)
-	if (!Object.keys(uploadedStems).includes(stem)) {
-		await uploadToS3(s3, pathToStem, 'stems')
+async function uploadStems() {
+	for (const stem of stems) {
+		const pathToStem = path.join(dir, stem)
+		if (!Object.keys(uploadedStems).includes(stem)) {
+			await uploadToS3(s3, pathToStem, 'stems')
+		}
 	}
-})
+}
+uploadStems()
